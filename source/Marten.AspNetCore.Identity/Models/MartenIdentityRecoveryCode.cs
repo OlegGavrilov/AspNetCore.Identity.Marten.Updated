@@ -1,4 +1,7 @@
-﻿namespace Marten.AspNetCore.Identity.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Marten.AspNetCore.Identity.Models;
 
 /// <summary>
 /// A class representing a recovery code (User Two Factor Recovery.)

@@ -1,4 +1,7 @@
-﻿namespace Marten.AspNetCore.Identity.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Marten.AspNetCore.Identity.Models;
 
 /// <summary>
 /// Represents a login and its associated provider for a user.

@@ -1,7 +1,12 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading;
+using System.Threading.Tasks;
+using JasperFx;
 using Marten.AspNetCore.Identity.Extensions;
 using Marten.AspNetCore.Identity.Models;
-using Marten.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
 namespace Marten.AspNetCore.Identity.UserStore;
@@ -54,7 +59,7 @@ public class MartenUserStore<TUser, TRole> :
     /// <summary>
     /// Session used for updating and querying the role store
     /// </summary>
-    protected IDocumentSession Session => _session ??= _documentStore.OpenSession(DocumentTracking.None);
+    protected IDocumentSession Session => _session ??= _documentStore.LightweightSession();
 
     /// <summary>
     /// A navigation property for the users the store contains.
@@ -1104,7 +1109,7 @@ public class MartenUserStore<TUser, TRole> :
             throw new ArgumentNullException(nameof(user));
         }
 
-        return Task.FromResult(user.LockoutEndAtUtc);
+        return Task.FromResult<DateTimeOffset?>(user.LockoutEndAtUtc);
     }
 
     /// <summary>

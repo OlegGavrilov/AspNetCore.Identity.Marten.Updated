@@ -1,9 +1,9 @@
+using JasperFx;
 using Marten;
 using Marten.AspNetCore.Identity.Configuration;
 using Marten.AspNetCore.Identity.Models;
 using Marten.IdentityExampleApp.Infrastructure;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Weasel.Core;
 using StoreOptions = Marten.StoreOptions;
 
 var builder = WebApplication.CreateBuilder(args);

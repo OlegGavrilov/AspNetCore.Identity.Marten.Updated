@@ -1,4 +1,5 @@
-﻿using Marten.AspNetCore.Identity.Models;
+﻿using JasperFx.Core;
+using Marten.AspNetCore.Identity.Models;
 using Marten.Schema.Identity;
 
 namespace Marten.AspNetCore.Identity.Configuration;
@@ -25,7 +26,7 @@ public static class MartenIdentityStoreOptionsExtensions
         this MartenRegistry.DocumentMappingExpression<MartenIdentityUser> mapping)
     {
         mapping
-            .IdStrategy(new CombGuidIdGeneration())
+            .IdStrategy(new SequentialGuidIdGeneration())
             .Index(x => x.NormalizedUserName, x => { x.IsUnique = true; })
             .Index(x => x.NormalizedEmailAddress, x => { x.IsUnique = false; });
     }
@@ -34,7 +35,7 @@ public static class MartenIdentityStoreOptionsExtensions
         this MartenRegistry.DocumentMappingExpression<MartenIdentityRole> mapping)
     {
         mapping
-            .IdStrategy(new CombGuidIdGeneration())
+            .IdStrategy(new SequentialGuidIdGeneration())
             .Index(x => x.NormalizedName, x => { x.IsUnique = true; });
     }
 }

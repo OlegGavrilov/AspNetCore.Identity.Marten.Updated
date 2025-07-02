@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using Baseline;
+using JasperFx.Core;
 using Marten.Services;
 using Npgsql;
 
@@ -79,6 +79,18 @@ internal class MartenLogger : IMartenLogger, IMartenSessionLogger
         _logger.Log(LogFailureLogLevel, ex, message, command.CommandText, parameters);
     }
 
+    public void LogSuccess(NpgsqlBatch batch)
+    {
+    }
+
+    public void LogFailure(NpgsqlBatch batch, Exception ex)
+    {
+    }
+
+    public void LogFailure(Exception ex, string message)
+    {
+    }
+
     public void RecordSavedChanges(IDocumentSession session, IChangeSet commit)
     {
         _stopwatch?.Stop();
@@ -103,5 +115,10 @@ internal class MartenLogger : IMartenLogger, IMartenSessionLogger
 
         _stopwatch = new Stopwatch();
         _stopwatch.Start();
+    }
+
+    public void OnBeforeExecute(NpgsqlBatch batch)
+    {
+        throw new NotImplementedException();
     }
 }
