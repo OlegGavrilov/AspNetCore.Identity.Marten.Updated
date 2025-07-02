@@ -1,7 +1,13 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading;
+using System.Threading.Tasks;
+using JasperFx;
 using Marten.AspNetCore.Identity.Extensions;
 using Marten.AspNetCore.Identity.Models;
-using Marten.Exceptions;
+using Marten.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace Marten.AspNetCore.Identity.RoleStore;
@@ -32,7 +38,7 @@ public class MartenRoleStore<TRole> :
     /// <summary>
     /// Session used for updating and querying the role store
     /// </summary>
-    protected IDocumentSession Session => _session ??= _documentStore.OpenSession(DocumentTracking.None);
+    protected IDocumentSession Session => _session ??= _documentStore.LightweightSession();
 
     /// <summary>
     /// A navigation property for the roles the store contains.

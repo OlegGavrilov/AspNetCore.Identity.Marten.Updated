@@ -1,4 +1,6 @@
-﻿using Marten.Metadata;
+﻿using System;
+using System.Collections.Generic;
+using Marten.Metadata;
 
 namespace Marten.AspNetCore.Identity.Models;
 

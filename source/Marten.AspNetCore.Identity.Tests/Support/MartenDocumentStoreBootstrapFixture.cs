@@ -1,6 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Threading.Tasks;
+using JasperFx;
 using Npgsql;
-using Weasel.Core;
 using Xunit;
 
 namespace Marten.AspNetCore.Identity.Tests.Support
@@ -18,13 +20,13 @@ namespace Marten.AspNetCore.Identity.Tests.Support
 
         public IDocumentStore ConfigureMartenDocumentStore(Action<StoreOptions> additionalConfiguration)
         {
-            _documentStore = global::Marten.DocumentStore.For(_ =>
+            _documentStore = global::Marten.DocumentStore.For(o =>
             {
-                _.Connection(DatabaseServerBootstrapFixture.ConnectionString);
-                _.AutoCreateSchemaObjects = AutoCreate.All;
-                _.DatabaseSchemaName = _schemaName;
-                _.Events.DatabaseSchemaName = _schemaName;
-                additionalConfiguration(_);
+                o.Connection(DatabaseServerBootstrapFixture.ConnectionString);
+                o.AutoCreateSchemaObjects = AutoCreate.All;
+                o.DatabaseSchemaName = _schemaName;
+                o.Events.DatabaseSchemaName = _schemaName;
+                additionalConfiguration(o);
             });
 
             return _documentStore;
