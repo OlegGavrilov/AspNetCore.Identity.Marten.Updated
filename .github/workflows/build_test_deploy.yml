@@ -1,76 +1,35 @@
-name: Build, test and deploy
+name: "Publish to NuGet Gallery"
 
-on:
-  push:
-  pull_request:
+on: 
+  release:
+    types: [published]
 
 env:
-  # Stop wasting time caching packages
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  # Disable sending usage data to Microsoft
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
-
-  # Official NuGet Feed settings
-  NUGET_FEED: https://api.nuget.org/v3/index.json
+  PROJECT_PATH: source/Marten.AspNetCore.Identity/Marten.AspNetCore.Identity.csproj
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
+  NUGET_SOURCE_URL: "'https://api.nuget.org/v3/index.json'"
 
 jobs:
-  build_test_deploy:
-    runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: ./source
-
+  publish:
+    name: "Publish to NuGet Gallery"
+    runs-on: "windows-latest"
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0        
-
-    - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.13
-      with:
-        versionSpec: '5.10.0'
-
-    - name: Determine Version
-      id:   gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.13            
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
+      - name: "Checkout"
+        uses: actions/checkout@v4
         
-    - name: Restore dependencies
-      run: dotnet restore
-      
-    - name: Build Release version
-      run: dotnet build --no-restore --configuration Release /p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.Sha }}
-      
-    - name: Run Tests
-      run: dotnet test --no-restore --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --settings Marten.AspNetCore.Identity.Tests/coverlet.runsettings
+      - name: "Install Dotnet"
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+          
+      - name: "Restore packages"
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+        
+      - name: "Build project"
+        run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+        
+      - name: "Pack project"
+        run: dotnet pack ${{ env.PROJECT_PATH }} -p:PackageVersion=${{ github.event.release.name }} --no-restore --no-build --configuration Release --include-symbols --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
-    - name: Pack
-      run: dotnet pack --no-restore --no-build --configuration Release /p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} --output ./output 
-
-    - name: Upload Package to job as artificat
-      uses: actions/upload-artifact@v3
-      with:
-        name: "Marten.AspNetCore.Identity.Updated-${{ steps.gitversion.outputs.nuGetVersionV2 }}"
-        # Does not support current "working-directory" settings
-        path: source/output/*.nupkg
-        if-no-files-found: error
-
-    - name: Upload Package to release
-      if: contains(github.ref, 'main')
-      uses: svenstaro/upload-release-action@v1-release
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file_glob: true
-        # Does not support current "working-directory" settings
-        file: source/output/*.nupkg
-        tag: "${{ steps.gitversion.outputs.fullSemVer }}"
-        overwrite: true
-
-    - name: Upload Package to nuget
-      if: contains(github.ref, 'main')
-      run: dotnet nuget push ./output/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key ${{ secrets.NUGET_KEY }}
+      - name:  "Push package"
+        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/<Solution Name>.${{ github.event.release.name }}.nupkg -s ${{ env.NUGET_SOURCE_URL }} -k ${{ secrets.NUGET_AUTH_TOKEN }}
