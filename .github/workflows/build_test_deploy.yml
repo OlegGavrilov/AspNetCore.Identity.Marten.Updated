@@ -55,7 +55,7 @@ jobs:
     - name: Upload Package to job as artificat
       uses: actions/upload-artifact@v3
       with:
-        name: "Marten.AspNetCore.Identity-${{ steps.gitversion.outputs.nuGetVersionV2 }}"
+        name: "Marten.AspNetCore.Identity.Updated-${{ steps.gitversion.outputs.nuGetVersionV2 }}"
         # Does not support current "working-directory" settings
         path: source/output/*.nupkg
         if-no-files-found: error
