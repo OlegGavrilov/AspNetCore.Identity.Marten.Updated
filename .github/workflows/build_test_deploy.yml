@@ -6,7 +6,7 @@ on:
     types: [published]
 
 env:
-  PROJECT_PATH: source/Marten.AspNetCore.Identity.Updated/Marten.AspNetCore.Identity.Updated.csproj
+  PROJECT_PATH: source/Marten.AspNetCore.Identity/Marten.AspNetCore.Identity.csproj
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/output
   NUGET_SOURCE_URL: "'https://api.nuget.org/v3/index.json'"
 
@@ -28,4 +28,4 @@ jobs:
         run: dotnet pack ${{ env.PROJECT_PATH }} -p:PackageVersion=${{ github.event.release.name }} --no-restore --no-build --configuration Release --include-symbols --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
       - name:  "Push package"
-        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/Marten.AspNetCore.Identity.Updated.${{ github.event.release.name }}.nupkg -s ${{ env.NUGET_SOURCE_URL }} -k ${{ secrets.NUGET_AUTH_TOKEN }}
+        run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/Marten.AspNetCore.Identity.${{ github.event.release.name }}.nupkg -s ${{ env.NUGET_SOURCE_URL }} -k ${{ secrets.NUGET_AUTH_TOKEN }}
