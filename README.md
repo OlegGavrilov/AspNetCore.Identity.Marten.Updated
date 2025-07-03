@@ -1,7 +1,7 @@
-![build](https://github.com/soernt/AspNetCore.Identity.Marten/actions/workflows/build_test_deploy.yml/badge.svg)
+[![Publish to NuGet Gallery](https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/actions/workflows/build_test_deploy.yml/badge.svg?branch=main)](https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/actions/workflows/build_test_deploy.yml)
 
-# AspNetCore.Identity.Marten
-.Net Core Identity Stores using Marten
+# AspNetCore.Identity.Marten.Updated
+ASP.NET Identity Stores using latest Marten and .NET
 
 The users and roles stores are tested by using the offical Microsoft.AspNetCore.Identity.Specification.Tests packages. Have a look at the Marten.AspNetCore.Identity.Tests project. 
 To run the tests you should have docker installed. A PostgreSQL image will be automatically downloaded and used during the test. 
