@@ -6,18 +6,19 @@
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <!-- Nuget Package properties -->
-        <PackageId>Marten.AspNetCore.Identity</PackageId>
+        <PackageId>Marten.AspNetCore.Identity.Updated</PackageId>
         <Authors>Sörnt Poppe</Authors>
         <PackageTitle>Marten.AspNetCore.Identity</PackageTitle>
-        <Description>A Marten UserStore and RoleStore adapter for Microsoft.Extensions.Identity.Core 6.</Description>
+        <Description>A Marten UserStore and RoleStore adapter for latest ASP.NET Core and Marten</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageProjectUrl>https://github.com/soernt/AspNetCore.Identity.Marten</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Copyright>Copyright 2021 (c) Sörnt Poppe. All rights reserved.</Copyright>
         <PackageTags>aspnetcore marten identity membership</PackageTags>
-        <RepositoryUrl>https://github.com/soernt/AspNetCore.Identity.Marten</RepositoryUrl>
+        <RepositoryUrl>https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <LangVersion>latest</LangVersion>
+        <PackageLicenseUrl>https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/blob/main/LICENSE</PackageLicenseUrl>
         <!-- 
             Versioning  will be handled by the GithHub Workflow
         -->
