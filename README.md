@@ -1,4 +1,4 @@
-[![Publish to NuGet Gallery](https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/actions/workflows/build_test_deploy.yml/badge.svg?branch=main)](https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/actions/workflows/build_test_deploy.yml)
+[![Publish to NuGet Gallery](https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/actions/workflows/build_test_deploy.yml/badge.svg)](https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated/actions/workflows/build_test_deploy.yml)
 
 # AspNetCore.Identity.Marten.Updated
 ASP.NET Identity Stores using latest Marten and .NET
