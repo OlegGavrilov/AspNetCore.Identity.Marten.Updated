@@ -13,7 +13,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <Copyright>Copyright 2021 (c) Sörnt Poppe. All rights reserved.</Copyright>
+        <Copyright>Copyright 2025 (c) Oleg Gavrilov. All rights reserved, or maybe not who cares it's MIT.</Copyright>
         <PackageTags>aspnetcore marten identity membership</PackageTags>
         <RepositoryUrl>https://github.com/OlegGavrilov/AspNetCore.Identity.Marten.Updated</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
