@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Marten.AspNetCore.Identity\Marten.AspNetCore.Identity.csproj" />
+    <ProjectReference Include="..\Marten.AspNetCore.Identity.Updated\Marten.AspNetCore.Identity.Updated.csproj" />
   </ItemGroup>
   
   <ItemGroup>
